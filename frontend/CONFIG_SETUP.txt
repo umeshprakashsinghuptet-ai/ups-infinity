@@ -1,1 +1,0 @@
-Copy config.example.js to config.js and fill your Supabase URL, public anon key, and backend URL. config.js is gitignored intentionally; do not commit private credentials.
