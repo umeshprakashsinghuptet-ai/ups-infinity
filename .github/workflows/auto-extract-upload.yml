@@ -1,10 +1,12 @@
 name: UPS INFINITY ZIP Auto Extract
 
 on:
+  workflow_dispatch:
+
   push:
     paths:
       - 'UPS_INFINITY_PROJECT.zip'
-
+      
 permissions:
   contents: write
 
