@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080d18">
+<meta name="description" content="UPS INFINITY — AI Creator & Production Hub">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+<title>UPS INFINITY — AI Creator & Production Hub</title>
+<meta name="description" content="UPS INFINITY is a Hindi-English AI creator and production workspace for planning scripts, storyboards, scenes, visual prompts and browser-based video drafts.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://umeshprakashsinghuptet-ai.github.io/upscreatorstudio/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"UPS INFINITY — AI Creator & Production Hub","applicationCategory":"MultimediaApplication","operatingSystem":"Web, Android Chrome, Desktop Browser","description":"AI-assisted creative planning and browser-based production workspace. Provider-dependent features require configuration.","author":{"@type":"Person","name":"Umesh Prakash Singh"}}</script>
+<meta name="theme-color" content="#0b1020">
+<meta property="og:type" content="website">
+<meta property="og:title" content="UPS INFINITY — AI Creator & Production Hub">
+<meta property="og:description" content="Plan creative projects, scripts, storyboards and video drafts with UPS INFINITY.">
+<meta property="og:site_name" content="UPS INFINITY">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UPS INFINITY — AI Creator & Production Hub">
+<meta name="twitter:description" content="AI-assisted creator and production workspace.">
+<link rel="stylesheet" href="styles.css">
+<script src="config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="#" data-page="home"><span class="brand-mark">UPS</span><span><b>UPS INFINITY</b><small>AI CREATOR & PRODUCTION HUB</small></span></a>
+  <div class="nav-label">MAIN WORKSPACE</div>
+  <nav id="mainNav">
+    <button class="nav-item active" data-page="home"><i>⌂</i>AI Dashboard</button>
+    <button class="nav-item" data-page="autopilot"><i>✦</i>AI Auto-Pilot</button>
+    <button class="nav-item" data-page="search"><i>⌕</i>Smart Trend Search</button>
+    <button class="nav-item" data-page="content"><i>▤</i>Content Studio</button>
+    <button class="nav-item" data-page="series"><i>▣</i>Web Series Studio</button>
+    <button class="nav-item" data-page="poster"><i>▧</i>Poster & Image Studio</button>
+    <button class="nav-item" data-page="video"><i>▶</i>Video Studio</button>
+    <button class="nav-item" data-page="render"><i>▣</i>Local Video Renderer</button>
+  </nav>
+  <div class="nav-label">WORKSPACES</div>
+  <nav id="workspaceNav">
+    <button class="nav-item" data-page="education"><i>▣</i>Education</button>
+    <button class="nav-item" data-page="media"><i>◉</i>GK & Media</button>
+    <button class="nav-item" data-page="business"><i>⌂</i>Interior Business</button>
+    <button class="nav-item" data-page="personal"><i>♙</i>Personal Branding</button>
+    <button class="nav-item" data-page="projects"><i>▦</i>Projects Library</button>
+    <button class="nav-item" data-page="settings"><i>⚙</i>Settings & Integrations</button>
+    <a class="nav-item" href="legacy-v11/index.html" target="_blank" rel="noopener"><i>✧</i>V11 Legacy Tools Lab ↗</a>
+  </nav>
+  <div class="sidebar-status"><span class="status-dot"></span><div><b id="connectionStatus">Checking services…</b><small id="connectionDetail">Frontend ready</small></div></div>
+</aside>
+<main class="main">
+<header class="topbar">
+  <div class="top-title"><button class="icon-btn mobile-only" id="menuToggle" aria-label="Open menu">☰</button><div><div class="eyebrow">UNIVERSAL AI PRODUCTION WORKSPACE</div><h1 id="pageTitle">आपका AI Studio तैयार है।</h1></div></div>
+  <div class="top-actions"><span class="mode-badge">HYBRID MODE</span><button class="outline-btn" id="authButton">Sign in</button><div class="user-avatar" id="userAvatar">U</div></div>
+</header>
+
+<section class="global-production panel" id="globalProductionDirector" aria-label="Universal production settings">
+ <div class="global-production-head"><div><div class="eyebrow">UNIVERSAL PRODUCTION DIRECTOR</div><h2>Smart Auto Settings — सभी कैटेगरी के लिए</h2><p class="muted">एक ही कंट्रोल से Image, Video, 3D, Hybrid, Poster, Reel, Education और Business प्रोजेक्ट की गुणवत्ता तय करें।</p></div><span class="quality-pill" id="globalQualityBadge">AUTO QUALITY</span></div>
+ <div class="global-mode-row"><button class="btn primary" id="globalAutoMode" type="button" aria-pressed="true">✦ AUTO</button><button class="btn secondary" id="globalManualMode" type="button" aria-pressed="false">MANUAL</button><button class="btn secondary" id="globalHybridMode" type="button" aria-pressed="false">HYBRID</button><button class="btn secondary" id="globalReset" type="button">Reset Defaults</button></div>
+ <div class="global-settings-grid">
+  <label>Output Type<select id="gpOutput"><option value="AUTO">AUTO — Detect</option><option>IMAGE</option><option>VIDEO</option><option>3D</option><option>HYBRID</option><option>DOCUMENT</option><option>AUDIO</option></select></label>
+  <label>Visual Master<select id="gpMaster"><option value="AUTO">AUTO — Best Match</option><option value="IMAGE">IMAGE — RAW DSLR</option><option value="VIDEO">VIDEO — Cinematic</option><option value="THREE_D">3D — CGI / Materials</option><option value="HYBRID">HYBRID — Live + 3D + VFX</option></select></label>
+  <label>Resolution<select id="gpResolution"><option value="AUTO">AUTO — Recommended</option><option>720p</option><option>1080p</option><option>1440p</option><option>2160p / 4K</option><option>4320p / 8K (provider-dependent)</option></select></label>
+  <label>Aspect Ratio<select id="gpRatio"><option value="AUTO">AUTO — Platform Match</option><option>9:16 Vertical</option><option>16:9 Landscape</option><option>1:1 Square</option><option>4:5 Portrait</option><option>3:4 Portrait</option><option>2:3 Portrait</option><option>Custom</option></select></label>
+  <label>Video Duration<select id="gpDuration"><option value="AUTO">AUTO — Content Match</option><option>5 seconds</option><option>10 seconds</option><option>15 seconds</option><option>20 seconds</option><option>30 seconds</option><option>60 seconds</option><option>90 seconds</option><option>3 minutes</option><option>5 minutes</option><option>Custom</option></select></label>
+  <label>Frame Rate<select id="gpFps"><option value="AUTO">AUTO</option><option>24 FPS — Cinematic</option><option>25 FPS — PAL</option><option>30 FPS — Social</option><option>50 FPS — Smooth</option><option>60 FPS — High Motion</option></select></label>
+  <label>Image Quality<select id="gpImageQuality"><option>AUTO — Best Available</option><option>Standard</option><option>High</option><option>Ultra</option><option>RAW DSLR Natural</option></select></label>
+  <label>3D Material / Render<select id="gpMaterial"><option>AUTO — Scene Based</option><option>Photoreal PBR</option><option>Metal / Chrome</option><option>Glass / Transparent</option><option>Wood / Fabric / Stone</option><option>Clay / Matte</option><option>Stylized 3D</option><option>Scientific / Technical</option></select></label>
+  <label>Quality Target<select id="gpQuality"><option>ULTRA PREMIUM</option><option>PREMIUM</option><option>STANDARD</option><option>FAST DRAFT</option></select></label>
+  <label>Platform<select id="gpPlatform"><option value="AUTO">AUTO — Detect</option><option>Facebook</option><option>Instagram</option><option>YouTube</option><option>WhatsApp</option><option>Multi-platform</option><option>Website / Presentation</option></select></label>
+ </div>
+ <div class="global-recommendation" id="globalRecommendation" aria-live="polite">AUTO मोड सामग्री और प्लेटफॉर्म के अनुसार उपयुक्त सेटिंग चुनेगा।</div>
+ <div class="global-mode-row"><button class="btn primary" id="globalApply" type="button">✓ Apply Settings to All Studios</button><button class="btn secondary" id="globalCopy" type="button">Copy Production Settings</button></div>
+ <p class="tiny-note">Resolution, FPS, duration और render quality चुने गए provider / renderer की वास्तविक क्षमता पर निर्भर हैं। यह कंट्रोल production specification बनाता है; अकेले UI से AI media render नहीं होता।</p>
+</section>
+
+
+<section class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-copy"><div class="eyebrow">IMAGINE · CREATE · INNOVATE</div><h2>आपका विचार। <em>AI की पूरी क्रिएटिव टीम।</em></h2><p>GK, Current Affairs, Education, Motivation, Shayari, Vlog, Personal Branding और Business — किसी भी विषय पर एक ही जगह से कंटेंट की योजना और प्रोडक्शन ब्रीफ तैयार करें।</p>
+    <div class="hero-actions"><button class="btn primary" data-action="wizard">✦ START AI AUTO-PILOT</button><button class="btn secondary" data-page="search">⌕ खोजें / ट्रेंड देखें</button></div></div>
+    <div class="hero-orbit"><div class="orbit-ring"></div><div class="orbit-core">AI</div><span class="orbit-chip chip-a">RESEARCH</span><span class="orbit-chip chip-b">CREATE</span><span class="orbit-chip chip-c">PUBLISH</span></div>
+  </div>
+  <div class="section-heading"><div><h3>आप क्या बनाना चाहते हैं?</h3><p>काम के अनुसार स्टूडियो चुनें।</p></div><span class="subtle">SMART CATEGORY ROUTING</span></div>
+  <div class="studio-grid">
+    <button class="studio-card" data-page="autopilot"><span class="studio-icon">✦</span><b>AI Auto-Pilot</b><small>आपका निर्देश समझे और पूरा कंटेंट पैकेज तैयार करे।</small><label>ONE SMART WORKFLOW</label></button>
+    <button class="studio-card" data-page="search"><span class="studio-icon">⌕</span><b>Trend Search</b><small>विषय खोजें, ताजा स्रोत देखें और कंटेंट शुरू करें।</small><label>DISCOVER TOPICS</label></button>
+    <button class="studio-card" data-page="poster"><span class="studio-icon">▧</span><b>Poster & Image</b><small>पोस्टर, थंबनेल और फोटो प्रॉम्प्ट।</small><label>ULTRA PHOTOREALISM</label></button>
+    <button class="studio-card" data-page="video"><span class="studio-icon">▶</span><b>Video Production</b><small>स्क्रिप्ट, सीन और क्लिप-वाइज वीडियो प्रॉम्प्ट।</small><label>CINEMATIC REALISM</label></button>
+    <button class="studio-card" data-page="education"><span class="studio-icon">▣</span><b>Education Studio</b><small>लेक्चर, नोट्स, प्रश्न बैंक और PPT ब्रीफ।</small><label>LEARNING CONTENT</label></button>
+    <button class="studio-card" data-page="media"><span class="studio-icon">◉</span><b>GK & Media</b><small>GK, क्विज, करंट अफेयर्स और डेली न्यूज़।</small><label>FACT CHECK FIRST</label></button>
+    <button class="studio-card" data-page="business"><span class="studio-icon">⌂</span><b>Business Studio</b><small>Interior प्रोडक्ट, कैटलॉग और प्रमोशनल कंटेंट।</small><label>BRAND WORKSPACE</label></button>
+    <button class="studio-card" data-page="personal"><span class="studio-icon">♙</span><b>Personal Branding</b><small>आपकी पहचान के साथ व्यक्तिगत क्रिएटिव प्रोजेक्ट।</small><label>IDENTITY PROFILE</label></button>
+  </div>
+  <div class="dashboard-columns">
+    <section class="panel"><div class="panel-head"><div><div class="eyebrow">SMART TREND DISCOVERY</div><h3>आज क्या बनाना चाहेंगे?</h3></div><span class="live-label">SOURCE-AWARE</span></div><div class="search-row"><input id="quickSearch" placeholder="जैसे: आज के 5 महत्वपूर्ण करंट अफेयर्स…" /><button class="btn primary" id="quickSearchBtn">खोजें</button></div><div class="quick-chips"><button data-query="आज के GK ट्रेंडिंग टॉपिक">आज के GK</button><button data-query="भारत की ताजा खबरें">Daily News</button><button data-query="Education trending topics">Education</button><button data-query="Motivational video topics">Motivation</button></div><div id="quickResults" class="result-list"><div class="empty-state">लाइव खोज के लिए Backend और RSS/Search सेवा कॉन्फ़िगर करें।</div></div></section>
+    <section class="panel"><div class="eyebrow">SMART CREATIVE WIZARD</div><h3>आपका काम, आपका तरीका</h3><p class="muted">एक समय में एक जरूरी सवाल। पहले से मिली जानकारी दोबारा नहीं पूछी जाएगी।</p><div class="mode-switch"><button data-mode="AUTO">AUTO</button><button class="selected" data-mode="HYBRID">HYBRID</button><button data-mode="MANUAL">MANUAL</button></div><div class="workflow-line">Idea <b>→</b> Research <b>→</b> Script <b>→</b> Identity <b>→</b> Poster <b>→</b> Video <b>→</b> QA</div><button class="btn secondary full" data-action="wizard">SMART QUESTION WIZARD खोलें →</button></section>
+  </div>
+</section>
+
+<section class="page" id="page-autopilot"><div class="page-intro"><div class="eyebrow">AI CREATIVE DIRECTOR</div><h2>Auto-Pilot Production</h2><p>अपना विचार लिखें या बोलें। सिस्टम एक-एक जरूरी सवाल पूछकर प्रोडक्शन ब्रीफ बनाएगा।</p><button class="btn primary" data-action="wizard">✦ नया प्रोजेक्ट शुरू करें</button></div></section>
+<section class="page" id="page-search"><div class="page-intro"><div class="eyebrow">LIVE TREND INTELLIGENCE</div><h2>Smart Trend Search</h2><p>खोजें, स्रोत देखें और चुने हुए विषय से कंटेंट शुरू करें। ट्रेंड संकेतों को वास्तविक सर्च-वॉल्यूम न समझें।</p><div class="search-row"><input id="fullSearch" placeholder="किसी भी विषय, सवाल या ट्रेंड को खोजें…" /><button class="btn primary" id="fullSearchBtn">Search</button></div><div class="quick-chips"><button data-query="भारत की ताजा खबरें">India News</button><button data-query="Google trending searches India">Trending Searches</button><button data-query="education news India">Education</button></div><div id="fullResults" class="result-list"><div class="empty-state">अपनी खोज लिखें। परिणाम उपलब्ध RSS/search स्रोतों पर निर्भर होंगे।</div></div></div></section>
+<section class="page" id="page-content"><div class="page-intro"><div class="eyebrow">UNIVERSAL CATEGORY ENGINE</div><h2>Content Studio</h2><p>GK, Current Affairs, Motivation, Shayari, Story, Vlog, Podcast, Science, History, Business और अन्य कैटेगरी।</p><button class="btn primary" data-action="wizard">कंटेंट बनाना शुरू करें</button></div></section>
+<section class="page" id="page-series"><div class="page-intro"><div class="eyebrow">SERIES BIBLE · EPISODE CONTINUITY · PRODUCTION PLANNER</div><h2>Web Series Studio</h2><p>सीरीज का विषय, शैली, एपिसोड संख्या और भाषा चुनें। यह मॉड्यूल अभी सीरीज बाइबल और एपिसोड-वाइज प्रोडक्शन प्लान बनाता है; वास्तविक AI स्क्रिप्ट विस्तार के लिए Backend AI Provider कॉन्फ़िगर करें।</p></div><div class="panel series-panel">
+<div class="series-modebar"><b>Production Mode</b><div class="actions">
+<button class="btn primary" id="seriesAutoMode" type="button" aria-pressed="true">✦ AUTO MODE</button>
+<button class="btn secondary" id="seriesManualMode" type="button" aria-pressed="false">MANUAL MODE</button>
+<button class="btn secondary" id="seriesHybridMode" type="button" aria-pressed="false">HYBRID MODE</button>
+</div><p class="muted">AUTO: खाली फ़ील्ड अपने आप भरें। MANUAL: आप सभी फ़ील्ड भरें। HYBRID: आपके दिए निर्देश के आधार पर बाकी फ़ील्ड सुझाएँ।</p></div>
+<div class="actions"><button class="btn primary" id="seriesAutoFill" type="button">⚡ सब कुछ AUTO-FILL करें</button><button class="btn secondary" id="seriesClear" type="button">फ़ॉर्म साफ़ करें</button><button class="btn secondary" id="seriesSurprise" type="button">🎲 नया विषय सुझाएँ</button></div>
+<label>Content Universe / Main Category<select id="seriesCategory"><option value="">AUTO SELECT</option></select></label>
+<label>Subcategory / Subgenre<select id="seriesSubcategory"><option value="">AUTO SELECT</option></select></label>
+<label>Topic Discovery Mode<select id="seriesTopicSource"><option value="AUTO_RANDOM">AUTO RANDOM — Local Library + connected live search</option><option value="AI_SUGGEST">AI SUGGESTION — requires AI provider</option><option value="LIVE_WEB">LIVE WEB SEARCH — requires Search Provider</option><option value="MANUAL_TOPIC">MANUAL TOPIC</option><option value="HYBRID">HYBRID — your topic + suggestions</option></select></label>
+<label>Topic / Search Query<input id="seriesTopicInput" placeholder="अपना विषय लिखें, बोलकर टाइप करें या खाली छोड़ें—AUTO चुनेगा"></label>
+<div class="actions"><button class="btn secondary" id="seriesApplyManualTopic" type="button">मेरा Topic लागू करें</button><button class="btn secondary" id="seriesLiveSearch" type="button">Live Web Search</button><button class="btn secondary" id="seriesAutoDiscover" type="button">Auto Topic खोजें</button></div>
+<div id="seriesResearchResults" class="series-output" aria-live="polite"></div>
+<label>Series Title<input id="seriesTitle" maxlength="120" placeholder="AUTO MODE में अपने आप भरेगा"></label>
+<label>Genre<select id="seriesGenre"><option>Educational Documentary</option><option>Motivational</option><option>Historical Drama</option><option>Mystery / Suspense</option><option>Science & Discovery</option><option>Social Awareness</option><option>Fictional Drama</option><option>Biography</option></select></label>
+<label>Core Topic / Premise<textarea id="seriesPremise" rows="3" placeholder="खाली छोड़ें—AUTO MODE विषय चुनेगा; चाहें तो अपना विषय लिखें…"></textarea></label>
+<div class="series-grid">
+<label>Episodes<input id="seriesEpisodes" type="number" min="2" max="30" value="5"></label>
+<label>Episode Duration (minutes)<input id="seriesDuration" type="number" min="1" max="90" value="1.5" step="0.5"></label>
+<label>Language<select id="seriesLanguage"><option>Hindi</option><option>Hindi + English</option><option>English</option></select></label>
+<label>Audience<input id="seriesAudience" placeholder="खाली छोड़ें—AUTO MODE चुनेगा"></label>
+</div>
+<div class="actions"><button class="btn primary" id="buildSeries">सीरीज प्लान बनाएँ</button><button class="btn secondary" id="copySeries">ग्रीन कॉपी</button><button class="btn secondary" id="exportSeries">JSON डाउनलोड</button></div>
+<div class="actions"><button class="btn secondary" id="seriesEpisodeScript" type="button">एपिसोड स्क्रिप्ट ड्राफ्ट</button><button class="btn secondary" id="seriesDownloadText" type="button">पूरा प्लान TXT डाउनलोड</button></div>
+<div id="seriesStatus" class="muted" role="status">AUTO MODE तैयार है। एक क्लिक में फ़ील्ड भरें और सीरीज प्लान बनाएँ।</div><div id="seriesOutput" class="series-output" aria-live="polite"></div></div></section>
+<section class="page" id="page-poster"><div class="page-intro"><div class="eyebrow">IMAGE MASTER ENGINE</div><h2>Poster & Image Studio</h2><p>Ultra-photorealistic RAW DSLR look, natural skin texture, balanced exposure, accurate text layout और platform-safe composition के लिए प्रॉम्प्ट तैयार करें।</p><button class="btn primary" data-action="wizard" data-format="Poster / Image">पोस्टर ब्रीफ बनाएँ</button></div></section>
+<section class="page" id="page-video"><div class="page-intro"><div class="eyebrow">CINEMATIC VIDEO ENGINE</div><h2>Video Studio</h2><p>Ultra-realistic cinematic photorealism, natural movement, scene continuity, dialogue और क्लिप-वाइज प्रॉम्प्ट।</p><button class="btn primary" data-action="wizard" data-format="Video / Reel">वीडियो ब्रीफ बनाएँ</button></div></section>
+<section class="page" id="page-render">
+ <div class="page-intro">
+  <div class="eyebrow">BROWSER-BASED DRAFT RENDERER</div><h2>Local Video Renderer</h2>
+  <p>अपने टेक्स्ट/सीन से चलने वाला वीडियो ड्राफ्ट बनाएं। यह लोकल ब्राउज़र रेंडर है—AI-generated footage, voice cloning या Sora rendering नहीं।</p>
+  <div class="render-form panel">
+   <label>वीडियो शीर्षक<input id="renderTitle" class="wizard-input visible" maxlength="90" value="UPS INFINITY — Video Draft"></label>
+   <label>सीन / नैरेशन (हर लाइन एक स्लाइड)<textarea id="renderScript" class="wizard-input visible" rows="7">आपका विचार, एक शानदार कहानी बन सकता है।\nहर दृश्य को स्पष्ट उद्देश्य दें।\nसही विजुअल, संवाद और संगीत अनुभव को बेहतर बनाते हैं।\nUPS INFINITY — Create with direction.</textarea></label>
+   <div class="global-settings-grid"><label>कुल अवधि<select id="renderDuration"><option value="10">10 सेकंड</option><option value="20">20 सेकंड</option><option value="30" selected>30 सेकंड</option><option value="60">60 सेकंड</option></select></label><label>फ्रेम रेट<select id="renderFps"><option>24</option><option selected>30</option></select></label><label>फॉर्मेट<select id="renderRatio"><option value="portrait">9:16 Vertical</option><option value="landscape">16:9 Landscape</option><option value="square">1:1 Square</option></select></label></div>
+   <div class="modal-actions"><button class="btn primary" id="renderStart" type="button">वीडियो ड्राफ्ट रेंडर करें</button><button class="btn secondary" id="renderStop" type="button" disabled>रोकें</button></div>
+   <progress id="renderProgress" value="0" max="100" style="width:100%"></progress><p id="renderStatus" class="muted" role="status" aria-live="polite">तैयार। रेंडर आपके डिवाइस के ब्राउज़र में होगा।</p>
+   <video id="renderPreview" controls playsinline style="display:none;width:100%;max-height:520px;background:#05070d;border-radius:14px"></video>
+   <a id="renderDownload" class="btn secondary" hidden>वीडियो डाउनलोड करें</a>
+   <p class="muted">नोट: समर्थित ब्राउज़र में WebM export होगा। MP4, वास्तविक AI footage, voice/TTS, lip-sync और FFmpeg multi-track export के लिए अलग provider/worker integration आवश्यक है।</p>
+  </div>
+ </div>
+</section>
+<section class="page" id="page-education"><div class="page-intro"><div class="eyebrow">TEACHING WORKSPACE</div><h2>Education Studio</h2><p>क्लास सामग्री, व्याख्यान, प्रश्न बैंक, असाइनमेंट, PPT और शैक्षणिक पोस्टर।</p><button class="btn primary" data-action="wizard" data-category="Education">शैक्षणिक कंटेंट बनाएँ</button></div></section>
+<section class="page" id="page-media"><div class="page-intro"><div class="eyebrow">GK · CURRENT AFFAIRS · NEWS</div><h2>GK & Media Workspace</h2><p>फैक्ट-चेक, स्रोत और तारीख के साथ क्विज, न्यूज़ और दैनिक कंटेंट।</p><button class="btn primary" data-action="wizard" data-category="GK / Current Affairs">GK / News बनाएँ</button></div></section>
+<section class="page" id="page-business"><div class="page-intro"><div class="eyebrow">BUSINESS CREATIVE WORKSPACE</div><h2>Interior Business Studio</h2><p>प्रोडक्ट प्रमोशन, कैटलॉग, विज्ञापन, ऑफर पोस्टर और वीडियो ब्रीफ।</p><button class="btn primary" data-action="wizard" data-category="Interior / Business">Business कंटेंट बनाएँ</button></div></section>
+<section class="page" id="page-personal"><div class="page-intro"><div class="eyebrow">IDENTITY & BRAND</div><h2>Personal Branding</h2><p>रेफरेंस फोटो से पहचान का मार्गदर्शन; आउटफिट, सीन और कैमरा विषय के अनुसार।</p><button class="btn primary" data-action="wizard" data-category="Personal Branding">प्रोजेक्ट बनाएँ</button></div></section>
+<section class="page" id="page-projects"><div class="page-intro"><div class="eyebrow">PROJECT LIBRARY</div><h2>आपके प्रोजेक्ट</h2><p>ब्राउज़र में सेव किए गए ब्रीफ और, Supabase कॉन्फ़िगर होने पर, क्लाउड प्रोजेक्ट।</p><div id="projectsList" class="project-list"></div></div></section>
+<section class="page" id="page-settings"><div class="page-intro"><div class="eyebrow">CONFIGURATION & CONNECTIONS</div><h2>Settings & Integrations</h2><p>सेवाओं की स्थिति देखें। API keys को केवल सुरक्षित Backend में रखें।</p><div class="integration-grid"><div class="integration"><b>Supabase</b><span id="supabaseState">Checking…</span></div><div class="integration"><b>AI Backend</b><span id="backendState">Checking…</span></div><div class="integration"><b>Trend Search</b><span id="searchState">Backend-dependent</span></div></div><button class="btn secondary" id="healthCheck">कनेक्शन जाँचें</button><button class="btn secondary" id="signOutButton">Sign out</button></div></section>
+
+<footer>UPS INFINITY · AI CREATOR & PRODUCTION HUB<br><span>Developed by Umesh Prakash Singh · Production features require configured APIs, provider permissions and end-to-end testing.</span></footer>
+</main>
+</div>
+
+<div class="modal-backdrop" id="wizardModal"><div class="modal"><div class="modal-top"><div><div class="eyebrow">UPS SMART AI DIRECTOR</div><h2 id="wizardTitle">आप क्या बनाना चाहते हैं?</h2></div><button class="icon-btn" id="wizardClose">✕</button></div><div class="step-meta" id="stepMeta"></div><p class="muted" id="wizardHint"></p><div id="wizardOptions" class="wizard-options"></div><textarea id="wizardInput" class="wizard-input" rows="3" placeholder="अपना विषय या निर्देश लिखें…" hidden></textarea><div class="modal-actions"><button class="btn secondary" id="wizardBack">रद्द करें</button><button class="btn primary" id="wizardNext">आगे बढ़ें →</button></div></div></div>
+<div class="modal-backdrop" id="authModal"><div class="modal auth-modal"><div class="modal-top"><div><div class="eyebrow">ACCOUNT</div><h2>Sign in / Register</h2></div><button class="icon-btn" id="authClose">✕</button></div><p class="muted">Supabase Auth कॉन्फ़िगर होने पर ईमेल और पासवर्ड से लॉगिन करें।</p><input class="wizard-input visible" id="authEmail" type="email" placeholder="Email address"><input class="wizard-input visible" id="authPassword" type="password" placeholder="Password"><div class="modal-actions"><button class="btn secondary" id="registerBtn">Register</button><button class="btn primary" id="loginBtn">Sign in</button></div><div id="authMessage" class="muted"></div></div></div>
+<div class="toast" id="toast"></div>
+<script src="./visual-quality-engine.js" defer></script>
+<script src="./global-production-engine.js" defer></script>
+<script src="./compact-prompt-engine.js" defer></script>
+<script src="./universal-content-library.js" defer></script>
+<script src="./web-series-engine.js" defer></script>
+<script src="./production-director-engine.js" defer></script>
+<script src="./local-video-renderer.js" defer></script>
+<script src="./app.js" defer></script>
+</body></html>

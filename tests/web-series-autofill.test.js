@@ -1,0 +1,11 @@
+const fs=require('node:fs');
+const path=require('node:path');
+const assert=require('node:assert/strict');
+const root=path.join(__dirname,'..','frontend');
+const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
+const js=fs.readFileSync(path.join(root,'web-series-engine.js'),'utf8');
+const css=fs.readFileSync(path.join(root,'styles.css'),'utf8');
+for(const id of ['seriesAutoMode','seriesManualMode','seriesHybridMode','seriesAutoFill','seriesClear','seriesSurprise','seriesEpisodeScript','seriesDownloadText','buildSeries','copySeries','exportSeries','seriesOutput','seriesStatus']) assert.match(html,new RegExp('id="'+id+'"'));
+for(const token of ['AUTO','MANUAL','HYBRID','function fill','function suggest','function build','function scriptDraft','seriesBible','continuity','localStorage']) assert.ok(js.includes(token),`Missing ${token}`);
+assert.match(css,/Web Series Studio AUTO\/MANUAL\/HYBRID controls/);
+console.log('Web Series AUTO/MANUAL/HYBRID test: PASS');

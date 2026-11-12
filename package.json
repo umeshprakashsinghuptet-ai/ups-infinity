@@ -1,0 +1,13 @@
+{
+  "name": "ups-infinity-ai-creator-production-hub",
+  "private": true,
+  "version": "1.0.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "check": "node scripts/check-all-js.js",
+    "preflight": "node scripts/preflight.js"
+  }
+}

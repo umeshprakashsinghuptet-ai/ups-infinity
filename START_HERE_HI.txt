@@ -1,0 +1,23 @@
+UPS INFINITY — सबसे पहले यह पढ़ें
+
+1. यह ZIP: UPS_INFINITY_PROJECT.zip
+   इसे rename करने की जरूरत नहीं है। नाम पहले से सही है।
+
+2. GitHub में पहले केवल एक Workflow file बनानी है:
+   .github/workflows/auto-extract-upload.yml
+   इस package की उसी path वाली file का पूरा content उसमें paste करके Commit करें।
+
+3. Repository Settings > Actions > General > Workflow permissions में
+   Read and write permissions सक्षम करें। Repository की default branch main होनी चाहिए।
+
+4. अब UPS_INFINITY_PROJECT.zip को Repository के ROOT में Upload files से upload करके Commit करें।
+
+5. Actions tab में 'UPS INFINITY ZIP Auto Extract' run देखें। Green success आने पर
+   ZIP अपने आप हट जाएगी और frontend/, backend/, docs/, tests/, config/ आदि folders
+   अपनी मूल जगह पर आ जाएँगे।
+
+6. GitHub Pages workflow frontend/ folder को publish करता है। Express backend
+   अलग Node hosting पर deploy होता है। इसके लिए render.yaml और docs/DEPLOYMENT_ENV_MATRIX_HI.md देखें।
+
+सुरक्षा: .env, API secret, Supabase service-role key, payment secret या APK signing key
+कभी GitHub पर upload न करें।

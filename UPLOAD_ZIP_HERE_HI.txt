@@ -1,0 +1,23 @@
+UPS INFINITY — GitHub ZIP Upload
+
+ZIP upload filename (exact): UPS_INFINITY_PROJECT.zip
+
+FIRST-TIME SETUP:
+1. Back up your existing GitHub repository (Code > Download ZIP).
+2. On the main branch, create this file first:
+   .github/workflows/auto-extract-upload.yml
+   Copy the same file from this package's .github/workflows folder.
+3. Also upload this helper file, preserving its path:
+   .github/scripts/extract_upload.py
+4. Commit those two files before uploading the project ZIP.
+5. Upload UPS_INFINITY_PROJECT.zip to the repository root and commit it.
+6. Open Actions and watch 'UPS INFINITY ZIP Auto Extract'.
+7. A green run means extraction completed. The uploaded ZIP is removed automatically.
+
+IMPORTANT:
+- Repository default branch must be main for this workflow as currently configured.
+- Settings > Actions > General > Workflow permissions must allow read/write repository contents.
+- ZIP must contain exactly one top-level folder named UPS_INFINITY_AI_CREATOR_PRODUCTION_HUB.
+- Original folders frontend/, backend/, docs/, config/, tests/, etc. are preserved.
+- GitHub Pages deploys frontend/ through the included Pages workflow. Backend is separate.
+- Never upload .env files, service-role keys, private API keys, payment secrets, or signing keys.

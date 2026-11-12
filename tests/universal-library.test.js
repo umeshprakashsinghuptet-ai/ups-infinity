@@ -1,0 +1,11 @@
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
+const front=path.join(__dirname,'..','frontend');
+const html=fs.readFileSync(path.join(front,'index.html'),'utf8');
+const js=fs.readFileSync(path.join(front,'universal-content-library.js'),'utf8');
+const series=fs.readFileSync(path.join(front,'web-series-engine.js'),'utf8');
+for(const id of ['seriesCategory','seriesSubcategory','seriesTopicSource','seriesTopicInput','seriesApplyManualTopic','seriesLiveSearch','seriesAutoDiscover','seriesResearchResults']) assert.ok(html.includes(`id="${id}"`),`Missing ${id}`);
+assert.ok(html.indexOf('universal-content-library.js')<html.indexOf('web-series-engine.js'),'Library must load before series engine');
+for(const term of ['Retail & Trade','Product Advertising & Commercials','Horror & Paranormal Fiction','Kids & Preschool','Cartoon & Animation','GK & General Knowledge','Motivation & Personal Growth']) assert.ok(js.includes(term),`Missing category ${term}`);
+assert.ok(series.includes('/api/research/search'),'Live search route must be called');
+assert.ok(series.includes('MANUAL_TOPIC')&&series.includes('AUTO_RANDOM')&&series.includes('HYBRID'),'Topic modes must exist');
+console.log('Universal Library / Retail / Topic Discovery QA: PASS');
