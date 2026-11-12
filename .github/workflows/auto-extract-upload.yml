@@ -4,44 +4,101 @@ on:
   workflow_dispatch:
 
   push:
+    branches:
+      - main
     paths:
-      - 'UPS_INFINITY_PROJECT.zip'
-      
+      - UPS_INFINITY_PROJECT.zip
+
 permissions:
   contents: write
 
+concurrency:
+  group: ups-infinity-extraction-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   extract:
+    name: Extract and Commit Project
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Extract Project ZIP
+      - name: Validate and Extract ZIP
+        shell: bash
         run: |
-          mkdir -p temp_extract
+          set -Eeuo pipefail
 
-          unzip -q UPS_INFINITY_PROJECT.zip -d temp_extract
+          ZIP_FILE="UPS_INFINITY_PROJECT.zip"
+          TEMP_DIR="$RUNNER_TEMP/ups_infinity_extract"
+          PROJECT_DIR="$TEMP_DIR/UPS_INFINITY_AI_CREATOR_PRODUCTION_HUB"
 
-          PROJECT_DIR="temp_extract/UPS_INFINITY_AI_CREATOR_PRODUCTION_HUB"
-
-          if [ ! -d "$PROJECT_DIR" ]; then
-            echo "ERROR: Project folder not found"
+          if [ ! -f "$ZIP_FILE" ]; then
+            echo "ERROR: Project ZIP not found."
             exit 1
           fi
 
-          cp -a "$PROJECT_DIR"/. .
+          mkdir -p "$TEMP_DIR"
 
-          rm -rf temp_extract
-          rm -f UPS_INFINITY_PROJECT.zip
+          unzip -Z1 "$ZIP_FILE" > "$TEMP_DIR/file-list.txt"
+
+          if grep -Eq '(^/|(^|/)\.\.(/|$))' "$TEMP_DIR/file-list.txt"; then
+            echo "ERROR: Unsafe ZIP path detected."
+            exit 1
+          fi
+
+          unzip -q "$ZIP_FILE" -d "$TEMP_DIR"
+
+          if [ ! -d "$PROJECT_DIR" ]; then
+            echo "ERROR: Expected project folder not found."
+            exit 1
+          fi
+
+          echo "Project folder verified."
+
+          # Preserve the existing GitHub workflow.
+          rsync -a --exclude='/.github/' "$PROJECT_DIR/" ./
+
+          echo "Project files extracted successfully."
+
+          rm -rf "$TEMP_DIR"
+          rm "$ZIP_FILE"
 
       - name: Commit Extracted Files
+        shell: bash
         run: |
+          set -Eeuo pipefail
+
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           git add -A
-          git reset -- .github/workflows
-          git commit -m "Extract UPS INFINITY project"
-          git push
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Extract UPS INFINITY project"
+          fi
+
+      - name: Sync Latest Main Branch
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+
+          git fetch origin "$GITHUB_REF_NAME"
+          git rebase "origin/$GITHUB_REF_NAME"
+
+      - name: Push Extracted Project
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+
+          git push origin "HEAD:$GITHUB_REF_NAME"
+
+      - name: Extraction Success
+        run: |
+          echo "UPS INFINITY extraction completed."
+          echo "Project files have been pushed successfully."
